@@ -41,7 +41,7 @@ public class SlotService {
         LocalDateTime startDateTime = LocalDateTime.of(request.getDate(), doctor.getWorkingHoursStart().toLocalTime());
         LocalDateTime endDateTime = LocalDateTime.of(request.getDate(), doctor.getWorkingHoursEnd().toLocalTime());
 
-        List<Slot> existingSlots = slotRepository.findByDoctorDIdAndSlotDate(doctorId, request.getDate());
+        List<Slot> existingSlots = slotRepository.findByDoctorIdAndSlotDate(doctorId, request.getDate());
         Set<LocalDateTime> existingStartTimes = existingSlots.stream()
                 .map(Slot::getStartTime)
                 .collect(Collectors.toSet());
@@ -70,12 +70,12 @@ public class SlotService {
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " + doctorId));
 
-        List<Slot> slots = slotRepository.findByDoctorDIdAndSlotDateAndIsActive(doctorId, date, "1");
+        List<Slot> slots = slotRepository.findByDoctorIdAndSlotDateAndIsActive(doctorId, date, "1");
 
         return slots.stream()
                 .map(slot -> {
                     String status = appointmentRepository
-                            .findBySlotSIdAndStatus(slot.getSId(), "BOOKED")
+                            .findBySlotIdAndStatus(slot.getId(), "BOOKED")
                             .map(appointment -> "BOOKED")
                             .orElse("FREE");
                     return toScheduleResponse(slot, status);
@@ -85,7 +85,7 @@ public class SlotService {
 
     private ScheduleResponse toScheduleResponse(Slot slot, String status) {
         return new ScheduleResponse(
-                slot.getSId(),
+                slot.getId(),
                 slot.getSlotDate(),
                 slot.getStartTime(),
                 slot.getEndTime(),

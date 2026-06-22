@@ -33,20 +33,20 @@ public class AppointmentService {
 
     @Transactional
     public AppointmentResponse bookAppointment(AppointmentRequest request) {
-        Slot slot = slotRepository.findBySIdAndIsActive(request.getSlotId(), "1")
+        Slot slot = slotRepository.findByIdAndIsActive(request.getSlotId(), "1")
                 .orElseThrow(() -> new ResourceNotFoundException("Slot not found or not available"));
 
         Patient patient = patientRepository.findById(request.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id: " + request.getPatientId()));
 
-        Optional<Appointment> existingBooking = appointmentRepository.findBySlotSIdAndStatus(request.getSlotId(), "BOOKED");
+        Optional<Appointment> existingBooking = appointmentRepository.findBySlotIdAndStatus(request.getSlotId(), "BOOKED");
         if (existingBooking.isPresent()) {
             throw new BusinessRuleViolationException("Slot is already booked");
         }
 
         List<Appointment> sameDayAppointments = appointmentRepository
-                .findByPatientPIdAndStatusAndSlotDoctorDIdAndSlotSlotDate(
-                        patient.getPId(), "BOOKED", slot.getDoctor().getDId(), slot.getSlotDate());
+                .findByPatientIdAndStatusAndSlotDoctorIdAndSlotSlotDate(
+                        patient.getId(), "BOOKED", slot.getDoctor().getId(), slot.getSlotDate());
         if (!sameDayAppointments.isEmpty()) {
             throw new BusinessRuleViolationException("Patient already has a booked appointment with this doctor on this date");
         }
@@ -89,20 +89,20 @@ public class AppointmentService {
             throw new BusinessRuleViolationException("Only BOOKED appointments can be rescheduled");
         }
 
-        Slot newSlot = slotRepository.findBySIdAndIsActive(request.getNewSlotId(), "1")
+        Slot newSlot = slotRepository.findByIdAndIsActive(request.getNewSlotId(), "1")
                 .orElseThrow(() -> new ResourceNotFoundException("New slot not found or not available"));
 
-        Optional<Appointment> existingBooking = appointmentRepository.findBySlotSIdAndStatus(request.getNewSlotId(), "BOOKED");
+        Optional<Appointment> existingBooking = appointmentRepository.findBySlotIdAndStatus(request.getNewSlotId(), "BOOKED");
         if (existingBooking.isPresent()) {
             throw new BusinessRuleViolationException("Slot is already booked");
         }
 
         List<Appointment> sameDayAppointments = appointmentRepository
-                .findByPatientPIdAndStatusAndSlotDoctorDIdAndSlotSlotDate(
-                        oldAppointment.getPatient().getPId(), "BOOKED", newSlot.getDoctor().getDId(), newSlot.getSlotDate());
+                .findByPatientIdAndStatusAndSlotDoctorIdAndSlotSlotDate(
+                        oldAppointment.getPatient().getId(), "BOOKED", newSlot.getDoctor().getId(), newSlot.getSlotDate());
         boolean hasConflict = false;
         for (Appointment a : sameDayAppointments) {
-            if (!a.getAId().equals(oldAppointment.getAId())) {
+            if (!a.getId().equals(oldAppointment.getId())) {
                 hasConflict = true;
                 break;
             }
@@ -130,9 +130,9 @@ public class AppointmentService {
 
     private AppointmentResponse toResponse(Appointment appointment) {
         AppointmentResponse response = new AppointmentResponse();
-        response.setAId(appointment.getAId());
-        response.setSlotId(appointment.getSlot().getSId());
-        response.setPatientId(appointment.getPatient().getPId());
+        response.setId(appointment.getId());
+        response.setSlotId(appointment.getSlot().getId());
+        response.setPatientId(appointment.getPatient().getId());
         response.setPatientName(appointment.getPatient().getName());
         response.setDoctorName(appointment.getSlot().getDoctor().getName());
         response.setSlotDate(appointment.getSlot().getSlotDate());
@@ -142,7 +142,7 @@ public class AppointmentService {
         response.setBookedAt(appointment.getBookedAt());
         response.setCancelledAt(appointment.getCancelledAt());
         response.setCompletedAt(appointment.getCompletedAt());
-        response.setRescheduledToAId(appointment.getRescheduledTo() != null ? appointment.getRescheduledTo().getAId() : null);
+        response.setRescheduledToId(appointment.getRescheduledTo() != null ? appointment.getRescheduledTo().getId() : null);
         return response;
     }
 }

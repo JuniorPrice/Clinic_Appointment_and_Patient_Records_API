@@ -48,11 +48,11 @@ public class DoctorService {
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " + doctorId));
 
         List<com.example.Clinic_Appointment_and_Patient_Records_API.model.Appointment> bookedBefore =
-                appointmentRepository.findBySlotDoctorDIdAndStatusAndSlotStartTimeBetween(
+                appointmentRepository.findBySlotDoctorIdAndStatusAndSlotStartTimeBetween(
                         doctorId, "BOOKED", LocalDateTime.MIN, request.getWorkingHoursStart());
 
         List<com.example.Clinic_Appointment_and_Patient_Records_API.model.Appointment> bookedAfter =
-                appointmentRepository.findBySlotDoctorDIdAndStatusAndSlotStartTimeBetween(
+                appointmentRepository.findBySlotDoctorIdAndStatusAndSlotStartTimeBetween(
                         doctorId, "BOOKED", request.getWorkingHoursEnd(), LocalDateTime.MAX);
 
         if (!bookedBefore.isEmpty() || !bookedAfter.isEmpty()) {
@@ -60,10 +60,10 @@ public class DoctorService {
                     "Cannot change working hours: doctor has booked appointments outside the new hours");
         }
 
-        List<Slot> slotsBefore = slotRepository.findByDoctorDIdAndStartTimeBetween(
+        List<Slot> slotsBefore = slotRepository.findByDoctorIdAndStartTimeBetween(
                 doctorId, LocalDateTime.MIN, request.getWorkingHoursStart());
 
-        List<Slot> slotsAfter = slotRepository.findByDoctorDIdAndStartTimeBetween(
+        List<Slot> slotsAfter = slotRepository.findByDoctorIdAndStartTimeBetween(
                 doctorId, request.getWorkingHoursEnd(), LocalDateTime.MAX);
 
         for (Slot slot : slotsBefore) {
@@ -84,7 +84,7 @@ public class DoctorService {
 
     private DoctorResponse toResponse(Doctor doctor) {
         return new DoctorResponse(
-                doctor.getDId(),
+                doctor.getId(),
                 doctor.getName(),
                 doctor.getSpecialty(),
                 doctor.getWorkingHoursStart(),

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class PatientResponse {
 
-    private Long pId;
+    private Long id;
     private String name;
     private LocalDate dateOfBirth;
     private String phone;
@@ -14,20 +14,20 @@ public class PatientResponse {
     public PatientResponse() {
     }
 
-    public PatientResponse(Long pId, String name, LocalDate dateOfBirth, String phone, LocalDateTime createdAt) {
-        this.pId = pId;
+    public PatientResponse(Long id, String name, LocalDate dateOfBirth, String phone, LocalDateTime createdAt) {
+        this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.phone = phone;
         this.createdAt = createdAt;
     }
 
-    public Long getPId() {
-        return pId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPId(Long pId) {
-        this.pId = pId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

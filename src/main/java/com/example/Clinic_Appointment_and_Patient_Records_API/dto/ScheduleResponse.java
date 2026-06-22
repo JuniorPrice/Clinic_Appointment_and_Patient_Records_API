@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class ScheduleResponse {
 
-    private Long sId;
+    private Long id;
     private LocalDate slotDate;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -14,20 +14,20 @@ public class ScheduleResponse {
     public ScheduleResponse() {
     }
 
-    public ScheduleResponse(Long sId, LocalDate slotDate, LocalDateTime startTime, LocalDateTime endTime, String status) {
-        this.sId = sId;
+    public ScheduleResponse(Long id, LocalDate slotDate, LocalDateTime startTime, LocalDateTime endTime, String status) {
+        this.id = id;
         this.slotDate = slotDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
     }
 
-    public Long getSId() {
-        return sId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSId(Long sId) {
-        this.sId = sId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getSlotDate() {

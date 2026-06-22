@@ -12,11 +12,11 @@ import java.util.Optional;
 @Repository
 public interface SlotRepository extends JpaRepository<Slot, Long> {
 
-    List<Slot> findByDoctorDIdAndSlotDateAndIsActive(Long doctorId, LocalDate slotDate, String isActive);
+    List<Slot> findByDoctorIdAndSlotDateAndIsActive(Long doctorId, LocalDate slotDate, String isActive);
 
-    List<Slot> findByDoctorDIdAndSlotDate(Long doctorId, LocalDate slotDate);
+    List<Slot> findByDoctorIdAndSlotDate(Long doctorId, LocalDate slotDate);
 
-    Optional<Slot> findBySIdAndIsActive(Long sId, String isActive);
+    Optional<Slot> findByIdAndIsActive(Long id, String isActive);
 
-    List<Slot> findByDoctorDIdAndStartTimeBetween(Long doctorId, LocalDateTime start, LocalDateTime end);
+    List<Slot> findByDoctorIdAndStartTimeBetween(Long doctorId, LocalDateTime start, LocalDateTime end);
 }

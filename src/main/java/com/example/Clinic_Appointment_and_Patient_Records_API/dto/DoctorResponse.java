@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class DoctorResponse {
 
-    private Long dId;
+    private Long id;
     private String name;
     private String specialty;
     private LocalDateTime workingHoursStart;
@@ -14,8 +14,8 @@ public class DoctorResponse {
     public DoctorResponse() {
     }
 
-    public DoctorResponse(Long dId, String name, String specialty, LocalDateTime workingHoursStart, LocalDateTime workingHoursEnd, LocalDateTime createdAt) {
-        this.dId = dId;
+    public DoctorResponse(Long id, String name, String specialty, LocalDateTime workingHoursStart, LocalDateTime workingHoursEnd, LocalDateTime createdAt) {
+        this.id = id;
         this.name = name;
         this.specialty = specialty;
         this.workingHoursStart = workingHoursStart;
@@ -23,12 +23,12 @@ public class DoctorResponse {
         this.createdAt = createdAt;
     }
 
-    public Long getDId() {
-        return dId;
+    public Long getId() {
+        return id;
     }
 
-    public void setDId(Long dId) {
-        this.dId = dId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -13,7 +13,7 @@ public class Visit {
     @SequenceGenerator(name = "visit_seq", sequenceName = "VISITS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "visit_seq")
     @Column(name = "v_id")
-    private Long vId;
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "a_id", nullable = false, unique = true)
@@ -37,8 +37,8 @@ public class Visit {
     public Visit() {
     }
 
-    public Visit(Long vId, Appointment appointment, String diagnosis, String prescription, LocalDateTime recordedAt, LocalDateTime createdAt) {
-        this.vId = vId;
+    public Visit(Long id, Appointment appointment, String diagnosis, String prescription, LocalDateTime recordedAt, LocalDateTime createdAt) {
+        this.id = id;
         this.appointment = appointment;
         this.diagnosis = diagnosis;
         this.prescription = prescription;
@@ -46,12 +46,12 @@ public class Visit {
         this.createdAt = createdAt;
     }
 
-    public Long getVId() {
-        return vId;
+    public Long getId() {
+        return id;
     }
 
-    public void setVId(Long vId) {
-        this.vId = vId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Appointment getAppointment() {

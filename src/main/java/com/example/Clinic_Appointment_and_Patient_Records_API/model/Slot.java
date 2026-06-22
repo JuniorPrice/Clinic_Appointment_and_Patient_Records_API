@@ -15,7 +15,7 @@ public class Slot {
     @SequenceGenerator(name = "slot_seq", sequenceName = "SLOTS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "slot_seq")
     @Column(name = "s_id")
-    private Long sId;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "d_id", nullable = false)
@@ -44,8 +44,8 @@ public class Slot {
     public Slot() {
     }
 
-    public Slot(Long sId, Doctor doctor, LocalDate slotDate, LocalDateTime startTime, LocalDateTime endTime, String isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.sId = sId;
+    public Slot(Long id, Doctor doctor, LocalDate slotDate, LocalDateTime startTime, LocalDateTime endTime, String isActive, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
         this.doctor = doctor;
         this.slotDate = slotDate;
         this.startTime = startTime;
@@ -55,12 +55,12 @@ public class Slot {
         this.updatedAt = updatedAt;
     }
 
-    public Long getSId() {
-        return sId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSId(Long sId) {
-        this.sId = sId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Doctor getDoctor() {

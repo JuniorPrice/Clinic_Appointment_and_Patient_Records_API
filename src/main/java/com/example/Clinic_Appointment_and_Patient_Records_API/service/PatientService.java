@@ -43,15 +43,15 @@ public class PatientService {
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id: " + patientId));
 
-        List<Appointment> appointments = appointmentRepository.findByPatientPIdOrderBySlotSlotDateDesc(patientId);
+        List<Appointment> appointments = appointmentRepository.findByPatientIdOrderBySlotSlotDateDesc(patientId);
         List<HistoryResponse> historyResponses = new ArrayList<>();
 
         for (Appointment appointment : appointments) {
             Slot slot = appointment.getSlot();
-            Optional<Visit> visit = visitRepository.findByAppointmentAId(appointment.getAId());
+            Optional<Visit> visit = visitRepository.findByAppointmentId(appointment.getId());
 
             HistoryResponse response = new HistoryResponse();
-            response.setAppointmentId(appointment.getAId());
+            response.setAppointmentId(appointment.getId());
             response.setSlotDate(slot.getSlotDate());
             response.setStartTime(slot.getStartTime());
             response.setEndTime(slot.getEndTime());
@@ -72,7 +72,7 @@ public class PatientService {
 
     private PatientResponse toResponse(Patient patient) {
         PatientResponse response = new PatientResponse();
-        response.setPId(patient.getPId());
+        response.setId(patient.getId());
         response.setName(patient.getName());
         response.setDateOfBirth(patient.getDateOfBirth());
         response.setPhone(patient.getPhone());

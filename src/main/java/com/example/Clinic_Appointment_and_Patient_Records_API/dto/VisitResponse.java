@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class VisitResponse {
 
-    private Long vId;
+    private Long id;
     private Long appointmentId;
     private String diagnosis;
     private String prescription;
@@ -13,20 +13,20 @@ public class VisitResponse {
     public VisitResponse() {
     }
 
-    public VisitResponse(Long vId, Long appointmentId, String diagnosis, String prescription, LocalDateTime recordedAt) {
-        this.vId = vId;
+    public VisitResponse(Long id, Long appointmentId, String diagnosis, String prescription, LocalDateTime recordedAt) {
+        this.id = id;
         this.appointmentId = appointmentId;
         this.diagnosis = diagnosis;
         this.prescription = prescription;
         this.recordedAt = recordedAt;
     }
 
-    public Long getVId() {
-        return vId;
+    public Long getId() {
+        return id;
     }
 
-    public void setVId(Long vId) {
-        this.vId = vId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getAppointmentId() {

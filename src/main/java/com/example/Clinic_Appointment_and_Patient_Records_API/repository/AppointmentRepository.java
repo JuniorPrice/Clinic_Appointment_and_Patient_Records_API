@@ -12,15 +12,15 @@ import java.util.Optional;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    Optional<Appointment> findBySlotSIdAndStatus(Long slotId, String status);
+    Optional<Appointment> findBySlotIdAndStatus(Long slotId, String status);
 
-    List<Appointment> findByPatientPIdAndStatusAndSlotDoctorDIdAndSlotSlotDate(Long patientId, String status, Long doctorId, LocalDate slotDate);
+    List<Appointment> findByPatientIdAndStatusAndSlotDoctorIdAndSlotSlotDate(Long patientId, String status, Long doctorId, LocalDate slotDate);
 
-    List<Appointment> findByPatientPIdOrderBySlotSlotDateDesc(Long patientId);
+    List<Appointment> findByPatientIdOrderBySlotSlotDateDesc(Long patientId);
 
-    List<Appointment> findByPatientPId(Long patientId);
+    List<Appointment> findByPatientId(Long patientId);
 
-    Optional<Appointment> findByAIdAndStatus(Long aId, String status);
+    Optional<Appointment> findByIdAndStatus(Long id, String status);
 
-    List<Appointment> findBySlotDoctorDIdAndStatusAndSlotStartTimeBetween(Long doctorId, String status, LocalDateTime start, LocalDateTime end);
+    List<Appointment> findBySlotDoctorIdAndStatusAndSlotStartTimeBetween(Long doctorId, String status, LocalDateTime start, LocalDateTime end);
 }

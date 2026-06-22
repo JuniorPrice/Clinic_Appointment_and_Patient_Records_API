@@ -15,7 +15,7 @@ public class Patient {
     @SequenceGenerator(name = "patient_seq", sequenceName = "PATIENTS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_seq")
     @Column(name = "p_id")
-    private Long pId;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -37,8 +37,8 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long pId, String name, LocalDate dateOfBirth, String phone, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.pId = pId;
+    public Patient(Long id, String name, LocalDate dateOfBirth, String phone, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.phone = phone;
@@ -46,12 +46,12 @@ public class Patient {
         this.updatedAt = updatedAt;
     }
 
-    public Long getPId() {
-        return pId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPId(Long pId) {
-        this.pId = pId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

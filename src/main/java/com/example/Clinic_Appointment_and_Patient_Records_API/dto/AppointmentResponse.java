@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class AppointmentResponse {
 
-    private Long aId;
+    private Long id;
     private Long slotId;
     private Long patientId;
     private String patientName;
@@ -17,13 +17,13 @@ public class AppointmentResponse {
     private LocalDateTime bookedAt;
     private LocalDateTime cancelledAt;
     private LocalDateTime completedAt;
-    private Long rescheduledToAId;
+    private Long rescheduledToId;
 
     public AppointmentResponse() {
     }
 
-    public AppointmentResponse(Long aId, Long slotId, Long patientId, String patientName, String doctorName, LocalDate slotDate, LocalDateTime startTime, LocalDateTime endTime, String status, LocalDateTime bookedAt, LocalDateTime cancelledAt, LocalDateTime completedAt, Long rescheduledToAId) {
-        this.aId = aId;
+    public AppointmentResponse(Long id, Long slotId, Long patientId, String patientName, String doctorName, LocalDate slotDate, LocalDateTime startTime, LocalDateTime endTime, String status, LocalDateTime bookedAt, LocalDateTime cancelledAt, LocalDateTime completedAt, Long rescheduledToId) {
+        this.id = id;
         this.slotId = slotId;
         this.patientId = patientId;
         this.patientName = patientName;
@@ -35,15 +35,15 @@ public class AppointmentResponse {
         this.bookedAt = bookedAt;
         this.cancelledAt = cancelledAt;
         this.completedAt = completedAt;
-        this.rescheduledToAId = rescheduledToAId;
+        this.rescheduledToId = rescheduledToId;
     }
 
-    public Long getAId() {
-        return aId;
+    public Long getId() {
+        return id;
     }
 
-    public void setAId(Long aId) {
-        this.aId = aId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getSlotId() {
@@ -134,11 +134,11 @@ public class AppointmentResponse {
         this.completedAt = completedAt;
     }
 
-    public Long getRescheduledToAId() {
-        return rescheduledToAId;
+    public Long getRescheduledToId() {
+        return rescheduledToId;
     }
 
-    public void setRescheduledToAId(Long rescheduledToAId) {
-        this.rescheduledToAId = rescheduledToAId;
+    public void setRescheduledToId(Long rescheduledToId) {
+        this.rescheduledToId = rescheduledToId;
     }
 }

@@ -14,7 +14,7 @@ public class Appointment {
     @SequenceGenerator(name = "appointment_seq", sequenceName = "APPOINTMENTS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_seq")
     @Column(name = "a_id")
-    private Long aId;
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "s_id", nullable = false)
@@ -51,8 +51,8 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long aId, Slot slot, Patient patient, String status, Appointment rescheduledTo, LocalDateTime bookedAt, LocalDateTime cancelledAt, LocalDateTime completedAt, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.aId = aId;
+    public Appointment(Long id, Slot slot, Patient patient, String status, Appointment rescheduledTo, LocalDateTime bookedAt, LocalDateTime cancelledAt, LocalDateTime completedAt, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
         this.slot = slot;
         this.patient = patient;
         this.status = status;
@@ -64,12 +64,12 @@ public class Appointment {
         this.updatedAt = updatedAt;
     }
 
-    public Long getAId() {
-        return aId;
+    public Long getId() {
+        return id;
     }
 
-    public void setAId(Long aId) {
-        this.aId = aId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Slot getSlot() {

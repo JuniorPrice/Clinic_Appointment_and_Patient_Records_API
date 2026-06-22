@@ -55,8 +55,8 @@ public class VisitService {
 
     private VisitResponse toResponse(Visit visit) {
         return new VisitResponse(
-                visit.getVId(),
-                visit.getAppointment().getAId(),
+                visit.getId(),
+                visit.getAppointment().getId(),
                 visit.getDiagnosis(),
                 visit.getPrescription(),
                 visit.getRecordedAt()
